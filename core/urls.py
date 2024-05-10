@@ -19,7 +19,9 @@ from django.urls import path,include
 from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('principal.urls'))
+    path('',include('principal.urls')),
+    path('accounts/',include('django.contrib.auth.urls'))
+
 ]
 
 if settings.DEBUG:

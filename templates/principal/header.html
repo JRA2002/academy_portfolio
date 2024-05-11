@@ -1,5 +1,4 @@
 {% if user.is_authenticated %}
-
 <header class="p-3 text-bg-primary">
 {% else %}
 <header class="p-3 text-bg-dark">
@@ -19,8 +18,16 @@
         </ul>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+        {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Log Out</button>
+          </form>
+        {% else %}
+        <a class="btn btn-outline-light me-2" href="{% url 'login' %}">Login</a>
+        <a class="btn btn-warning" href="{% url 'registration' %}">SignUp</a>
+        {% endif %}
+        
         </div>
       </div>
     </div>

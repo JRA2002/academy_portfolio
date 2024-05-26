@@ -7,14 +7,39 @@
         <div class="col-md-4">
             <div class="card border rounded-2 shadow mb-3">
                 <div class="card-body">
-                    {{user.last_name}} -- {{user.first_name}}
-                    <img class="">
+                    <img class="img thumbnail rounded-circle mb-3" src="{{user.profile.image.url}}" alt="{{user.username}}" style="width: 200px">
+                    <h1>{{user.last_name}} {{user.first_name}}</h1>
+                    <h4>{{group_name}}</h4>
+                    <p>{{user.username}}</p>
+                    <p>{{user.profile.group}}</p>
+                    <p>{{user.profile.address}}</p>
+                    <p>{{user.profile.location}}</p>
+                    <p>{{user.profile.telephone}}</p>
+                    <br>
+                    <a class="btn btn-outline-secondary w-100 mb-2" href="">Edit</a>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger w-100" type="submit">Logout</button>
+                    </form>
                 </div>
-               
-
             </div>
-
         </div>
+               <!--CARD VARIABLE-->
+               <div class="col-md-8">
+                <div class="card border rounded-2 shadow p-3 mb-3">
+                    <div class="card-body">
+                        {% if group_name == 'Adminitrative' %}
+                        {% include 'profile/admin.html' %}
+                        {% elif group_name == 'preceptor' %}
+                        {% include 'profile/preceptor.html' %}
+                        {% elif group_name == 'student' %}
+                        {% include 'profile/student.html' %}
+                        {% endif %}
+                        
+                    </div>
+                </div>
+
+               </div>
 
     </div>
 
